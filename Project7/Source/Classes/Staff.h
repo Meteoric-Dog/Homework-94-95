@@ -17,7 +17,7 @@ public:
 	Staff();
 	Staff(Staff *staff);
 	Staff(const char *Name, Date Birthday, int ID_Code, int Department_ID, Date Joined_Date, int Level);
-	~Staff();
+	virtual ~Staff();
 
 public:
 	void SetDepartment_ID(int Department_ID);

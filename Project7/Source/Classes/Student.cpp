@@ -22,7 +22,7 @@ Student::Student(const char * Name, Date Birthday, int ID_Code, int Grade, int N
 Student::~Student() {
 	if (!this->Score)
 		delete[]Score;
-	People::~People();
+	cout << "deteled student" << endl;
 }
 
 void Student::SetGrade(int Grade) {
@@ -82,6 +82,57 @@ float Student::Get_Average_Score() {
 
 int Student::GetMark() {
 	return STUDENT_MARK;
+}
+
+istream& operator>>(istream & is, Student *student) {
+	string temp;
+	getline(is, temp);
+	int leng = temp.length();
+	
+	if (student->Name)
+		delete[] student->Name;
+	student->Name = new char[leng + 1];
+	memcpy(student->Name, temp.c_str(), leng);
+	student->Name[leng] = 0;
+
+	Date tempDate;
+	is >> tempDate;
+	student->Birthday = tempDate;
+
+	is >> student->Grade;
+	is >> student->NumberOfProject;
+
+	if (student->Score) {
+		delete[] student->Score;
+		student->Score = NULL;
+	}
+	if (student->NumberOfProject > 0) {
+		student->Score = new float[student->NumberOfProject];
+		for (int i = 0; i < student->NumberOfProject; i++)
+			is >> student->Score[i];
+		getline(is, temp);
+	}
+	else {
+		getline(is, temp);
+		getline(is, temp);
+	}
+
+	return is;
+}
+
+ostream& operator<<(ostream& os, Student *student) {
+	os << student->Name<<endl;
+	os << student->Birthday;
+	os << student->Grade << " " << student->NumberOfProject << endl;
+	if (student->NumberOfProject > 0) {
+		for (int i = 0; i < student->NumberOfProject; i++)
+			os << student->Score[i] << " ";
+	}
+	else
+		os << "NULL";
+	os << endl;
+
+	return os;
 }
 
 float Student::Calculate_Average_Score() {

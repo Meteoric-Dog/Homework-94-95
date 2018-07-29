@@ -13,7 +13,8 @@ Staff::Staff(const char * Name, Date Birthday, int ID_Code, int Department_ID, D
 }
 
 Staff::~Staff() {
-	People::~People();
+//	People::~People();
+	cout << "deleted staff" << endl;
 }
 
 void Staff::SetDepartment_ID(int Department_ID) {

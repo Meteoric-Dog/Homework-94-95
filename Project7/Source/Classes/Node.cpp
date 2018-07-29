@@ -40,8 +40,10 @@ Node::Node(People * data) {
 }
 
 Node::~Node() {
-	this->next->~Node();            //delete this->next;
-	delete this->data;
+	if (this->next)
+		this->next->~Node();            //delete this->next;
+	if (this->data)
+		delete this->data;
 }
 
 int Node::Count_People(Node * head) {
@@ -190,3 +192,73 @@ Node * Node::Clone(Node *list) {
 	result->next = Node::Clone(list->next);
 	return result;
 }
+
+void Node::RemoveElement(Node *node) {
+	if (!node)
+		return;
+
+	if (node->data) {
+		delete node->data;
+		node->data = NULL;
+	}
+	//if (node->next) {
+		//Node::RemoveElement(node->next);
+		//node->next = NULL;
+	//}
+}
+
+void Node::SaveStudentList(const char *file_name, Node *head) {
+	Node *iter = head;
+	while (iter) {
+		if ((iter->data != NULL) && (iter->data->GetMark() == STUDENT_MARK)) {
+			iter = iter->next;
+		}
+		else {
+			cout << "This is not a student list" << endl;
+			return;
+		}
+	}
+
+	fstream file;
+	file.open(file_name, ios::out);
+	
+	if (file.is_open()) {
+		iter = head;
+		while (iter) {
+			file << ((Student *)iter->data);
+			iter = iter->next;
+		}
+	}
+
+	file.close();
+}
+
+void Node::LoadStudentList(const char * file_name, Node *&head) {
+	fstream file;
+	file.open(file_name, ios::in);
+
+	if (head) {
+		delete head;
+		head = NULL;
+	}
+
+	if (file.is_open()) {
+		Student *student = new Student();
+		Node *iter = NULL;
+
+		if (file.peek() != EOF) {
+			file >> student;
+			head = new Node(student);
+			iter = head;
+		}
+
+		while (file.peek() != EOF) {
+			file >> student;
+			iter->next = new Node(student);
+			iter = iter->next;
+		}
+	}
+
+	file.close();
+}
+
