@@ -257,6 +257,8 @@ void Node::LoadStudentList(const char * file_name, Node *&head) {
 			iter->next = new Node(student);
 			iter = iter->next;
 		}
+
+		delete student;
 	}
 
 	file.close();
