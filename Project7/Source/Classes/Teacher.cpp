@@ -17,7 +17,8 @@ Teacher::Teacher(const char * Name, Date Birthday, int ID_Code, int Department_I
 }
 
 Teacher::~Teacher() {
-	Staff::~Staff();
+//	Staff::~Staff();
+	cout << "deleted teacher" << endl;
 }
 
 void Teacher::SetClass(int Class) {

@@ -34,6 +34,8 @@ public:
 	void PrintInfo();
 	float Get_Average_Score();
 	int GetMark();
+	friend istream& operator>>(istream& is, Student *student);
+	friend ostream& operator<<(ostream& os, Student *student);
 
 private:
 	float Calculate_Average_Score();

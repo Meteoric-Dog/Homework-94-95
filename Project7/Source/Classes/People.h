@@ -20,7 +20,7 @@ public:
 	People();
 	People(People *people);
 	People(const char *Name, Date Birthday, int ID_Code);
-	~People();
+	virtual ~People();
 
 public:
 	char *GetName();

@@ -1,4 +1,5 @@
 #pragma once
+#include<fstream>
 #include "People.h"
 #include "Staff.h"
 #include "Student.h"
@@ -32,4 +33,8 @@ public:
 	static void Display_All(Node *head);
 
 	static Node *Clone(Node *list);
+	static void RemoveElement(Node *node);
+
+	static void SaveStudentList(const char *file_name, Node *head);
+	static void LoadStudentList(const char *file_name, Node *&head);
 };

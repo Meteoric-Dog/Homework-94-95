@@ -23,6 +23,7 @@ People::People(const char * Name, Date Birthday, int ID_Code): Birthday(Birthday
 People::~People() {
 	if (this->Name)
 		delete[]this->Name;
+	cout << "deleted people" << endl;
 }
 
 char *People::GetName() {

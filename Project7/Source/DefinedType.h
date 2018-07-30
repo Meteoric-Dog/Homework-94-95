@@ -3,6 +3,8 @@
 
 using namespace std;
 
+#define STUDENT_FILE "StudentList.txt"
+
 #define DAY_DISPLAY "Day:"
 #define MONTH_DISPLAY "Month:"
 #define YEAR_DISPLAY "Year:"
@@ -35,5 +37,17 @@ struct Date {
 		cout << DAY_DISPLAY << this->day << endl;
 		cout << MONTH_DISPLAY << this->month << endl;
 		cout << YEAR_DISPLAY << this->year << endl;
+	}
+
+	friend istream& operator>>(istream& is, Date& obj) {
+		is >> obj.day;
+		is >> obj.month;
+		is >> obj.year;
+		return is;
+	}
+
+	friend ostream& operator<<(ostream& os, Date& obj) {
+		os << obj.day << " " << obj.month << " " << obj.year << endl;
+		return os;
 	}
 };
